@@ -1,4 +1,5 @@
 const main = document.querySelector('main');
+const siteName = document.title;
 const byId = new Map(workshops.map(workshop => [workshop.id, workshop]));
 const routeFor = id => '#workshop/' + id;
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
@@ -69,8 +70,8 @@ function makeCatalog() {
     <div class="shell">
       <section class="hero" aria-labelledby="home-title">
         <div class="hero-copy">
-          <p class="kicker">Интерактивные мастер-классы · 8–11 классы</p>
-          <h1 id="home-title">Математика <span>живых систем</span></h1>
+          <p class="kicker">Биомедицина · 8–11 классы</p>
+          <h1 id="home-title">Мастер-классы по <span>матмоделированию</span> для школьников</h1>
           <p>Меняйте параметры моделей и разбирайтесь, как математика помогает исследовать сердце, анализировать снимки и проектировать импланты.</p>
           <div class="hero-actions">
             <a href="#catalog" class="button primary">Выбрать мастер-класс</a>
@@ -326,13 +327,13 @@ function route(first = false) {
     view = nextView;
     if (workshop) {
       makeLesson(workshop);
-      document.title = workshop.title + ' · Матмодель';
+      document.title = workshop.title + ' · ' + siteName;
     } else if (id) {
       main.innerHTML = '<section class="lesson shell"><h1>Занятие не найдено</h1><p><a class="button primary" href="#catalog">Открыть каталог</a></p></section>';
-      document.title = 'Занятие не найдено · Матмодель';
+      document.title = 'Занятие не найдено · ' + siteName;
     } else {
       makeCatalog();
-      document.title = 'Матмодель · Мастер-классы по биомедицине';
+      document.title = siteName;
     }
   }
   const target = !id && ['catalog', 'guide'].includes(hash) ? document.getElementById(hash) : null;
