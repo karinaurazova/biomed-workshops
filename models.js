@@ -728,6 +728,7 @@ const models = {
   rotor: {
     title: 'Волна возбуждения в ткани',
     controls: [checkbox('split', 'Фронт с разрывом', true), slider('step', 'Шаг модели', 0, 62, 1, 31)],
+    animation: { key: 'step', duration: 4400 },
     draw: drawRotor,
   },
   vision: {
@@ -740,6 +741,7 @@ const models = {
     controls: [choice('design', 'Геометрия ячейки', [['a', 'А · гибкая'], ['b', 'Б · сбалансированная'],
       ['c', 'В · жёсткая']], 'b'), slider('diameter', 'Диаметр после раскрытия, мм', 2.2, 4.4, .1, 3.6),
       slider('stiffness', 'Жёсткость стенки', .7, 1.7, .1, 1)],
+    animation: { key: 'diameter', duration: 2300, target: s => s.diameter },
     draw: drawStent,
   },
   implant: {
@@ -748,6 +750,7 @@ const models = {
       slider('time', 'Время, усл. ед.', 0, 130, .1, 32),
       slider('consistency', 'Консистенция K', .6, 2, .1, 1),
       slider('exponent', 'Показатель течения n', .6, 1.4, .05, 1)],
+    animation: { key: 'time', duration: 3600, target: s => Math.ceil(implantResult(s).fullTime * 1.08) },
     draw: drawImplant,
   },
 };
